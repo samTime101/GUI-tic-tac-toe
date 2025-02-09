@@ -117,11 +117,7 @@ int main() {
   int player_turn = 1;
   int computer_turn = 0;
 
-  for (int i = 0; i < ROWS; i++) {
-    for (int j = 0; j < COLS; j++) {
-      mat[i][j] = 0;
-    }
-  }
+
   GameScreen currentScreen = TITLE;
   SetTargetFPS(FPS);
   InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "AFTER 2 FREAKING YEARS!!");
@@ -150,6 +146,11 @@ int main() {
       }
         */
     } break;
+    case ENDING:{
+      if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP)) {
+        currentScreen = TITLE;
+      }
+      }
     default:
       break;
     }
@@ -158,12 +159,18 @@ int main() {
     BeginDrawing();
     switch (currentScreen) {
     case TITLE: {
+  for (int i = 0; i < ROWS; i++) {
+    for (int j = 0; j < COLS; j++) {
+      mat[i][j] = 0;
+    }
+  }
       DrawText("GAME OF LIFE IN C", 100, 30, 40, DARKGREEN);
       DrawText("Author : SAMIP REGMI", 100, 80, 30, RED);
       DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 10, 220, 20,
                DARKGREEN);
     } break;
     case GAMEPLAY: {
+
       if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && player_turn) {
         Vector2 mPos = GetMousePosition();
         int col = (int)mPos.x / CELL_WIDTH;
@@ -205,22 +212,26 @@ int main() {
     case ENDING: {
 
       if (check_for_win(mat, 1)) {
-        DrawText("COMPUTER WON", 100, 30, 40, RED);
+        DrawText("RESULT: COMPUTER WON", 40, 140, 40, RED);
         // break;
-      }break;
+      }
       if (check_for_win(mat, -1)) {
-           DrawText("HUMAN WON", 100, 30, 40, BLUE);
+           DrawText("RESULT: HUMAN WON", 70, 140, 40, BLUE);
 
         //printf("Human wins!\n");
         // break;
-      }break;
+      }
 
       if (check_for_draw(mat)) {
         //printf("Draw!\n");
-      DrawText("DRAW", 100, 30, 40, BLACK);
+      DrawText("RESULT: DRAW", 100, 140, 40, BLACK);
         // break;
       }
-    }
+      DrawText("GAME OF LIFE IN C", 100, 30, 30, DARKGREEN);
+      DrawText("Author : SAMIP REGMI", 100, 80, 30, BLACK);
+      DrawText("PRESS ENTER or TAP to JUMP to TITLE SCREEN", 5, 120, 20,
+               DARKGREEN);
+    }break;
     default:
       break;
     }
