@@ -117,7 +117,6 @@ int main() {
   int player_turn = 1;
   int computer_turn = 0;
 
-
   GameScreen currentScreen = TITLE;
   SetTargetFPS(FPS);
   InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "AFTER 2 FREAKING YEARS!!");
@@ -146,11 +145,11 @@ int main() {
       }
         */
     } break;
-    case ENDING:{
+    case ENDING: {
       if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP)) {
         currentScreen = TITLE;
       }
-      }
+    }
     default:
       break;
     }
@@ -159,15 +158,19 @@ int main() {
     BeginDrawing();
     switch (currentScreen) {
     case TITLE: {
-  for (int i = 0; i < ROWS; i++) {
-    for (int j = 0; j < COLS; j++) {
-      mat[i][j] = 0;
-    }
-  }
-      DrawText("GAME OF LIFE IN C", 100, 30, 40, DARKGREEN);
-      DrawText("Author : SAMIP REGMI", 100, 80, 30, RED);
-      DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 10, 220, 20,
+      for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+          mat[i][j] = 0;
+        }
+      }
+      DrawText("TIC TAC TOE IN C",
+               (SCREEN_WIDTH - MeasureText("TIC TAC TOE IN C", 40)) / 2, 30, 40,
                DARKGREEN);
+      DrawText("Author : SAMIP REGMI",
+               (SCREEN_WIDTH - MeasureText("Author : SAMIP REGMI", 30)) / 2, 80,
+               30, RED);
+      DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN",
+               (SCREEN_WIDTH - MeasureText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN",20)) /2,220, 20, DARKGREEN);
     } break;
     case GAMEPLAY: {
 
@@ -212,26 +215,36 @@ int main() {
     case ENDING: {
 
       if (check_for_win(mat, 1)) {
-        DrawText("RESULT: COMPUTER WON", 40, 140, 40, RED);
+        DrawText("RESULT: COMPUTER WON", (SCREEN_WIDTH - MeasureText("RESULT: COMPUTER WON", 25))/2, 140, 25, RED);
         // break;
       }
       if (check_for_win(mat, -1)) {
-           DrawText("RESULT: HUMAN WON", 70, 140, 40, BLUE);
+        DrawText("RESULT: HUMAN WON", (SCREEN_WIDTH - MeasureText("RESULT: HUMAN WON", 25))/2, 140, 25, BLUE);
 
-        //printf("Human wins!\n");
-        // break;
+        // printf("Human wins!\n");
+        //  break;
       }
 
       if (check_for_draw(mat)) {
-        //printf("Draw!\n");
-      DrawText("RESULT: DRAW", 100, 140, 40, BLACK);
+        // printf("Draw!\n");
+        DrawText("RESULT: DRAW", (SCREEN_WIDTH - MeasureText("RESULT: DRAW", 40))/2, 140, 40, BLACK);
         // break;
       }
-      DrawText("GAME OF LIFE IN C", 100, 30, 30, DARKGREEN);
-      DrawText("Author : SAMIP REGMI", 100, 80, 30, BLACK);
-      DrawText("PRESS ENTER or TAP to JUMP to TITLE SCREEN", 5, 120, 20,
+      DrawText("TIC TAC TOE IN C",
+               (SCREEN_WIDTH - MeasureText("TIC TAC TOE IN C", 40)) / 2, 30, 40,
                DARKGREEN);
-    }break;
+      DrawText("Author : SAMIP REGMI",
+               (SCREEN_WIDTH - MeasureText("Author : SAMIP REGMI", 30)) / 2, 80,
+               30, RED);
+      DrawText("PRESS ENTER or TAP to JUMP to TITLE SCREEN",
+               (SCREEN_WIDTH - MeasureText("PRESS ENTER or TAP to JUMP to TITLE SCREEN",20)) /2,220, 20, DARKGREEN);
+      /*
+    DrawText("TIC TAC TOE IN C", 100, 30, 30, DARKGREEN);
+    DrawText("Author : SAMIP REGMI", 100, 80, 30, BLACK);
+    DrawText("PRESS ENTER or TAP to JUMP to TITLE SCREEN", 5, 120, 20,
+             DARKGREEN);
+      */
+    } break;
     default:
       break;
     }
