@@ -3,6 +3,7 @@
 #include <stdio.h>
 // #include <float.h>
 #include <limits.h>
+#include<unistd.h>
 #define COLS 3
 #define ROWS 3
 #define SCREEN_WIDTH 600
@@ -130,6 +131,7 @@ int main() {
     case GAMEPLAY: {
       if (check_for_win(mat, 1) || check_for_win(mat, -1) ||
           check_for_draw(mat)) {
+          sleep(1);
         // DrawText("Computer Wins", 200, 200, 10, BLACK);
         currentScreen = ENDING;
       }
